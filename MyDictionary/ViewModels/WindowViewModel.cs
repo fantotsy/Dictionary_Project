@@ -61,6 +61,7 @@ namespace MyDictionary.ViewModels
             SimpleRandomChecked = false;
             EngUkrTranslationChecked = false;
             UkrEngTranslationChecked = false;
+            IsAnswerButtonEnabled = false;
 
             //Привязка команд.
             Add = new DelegateCommand(AddToDictionary);
@@ -791,6 +792,14 @@ namespace MyDictionary.ViewModels
             {
                 translatorAnswer = value;
                 OnPropertyChanged("TranslatorAnswer");
+                if (value == "")
+                {
+                    IsAnswerButtonEnabled = false;
+                }
+                else
+                {
+                    IsAnswerButtonEnabled = true;
+                }
             }
         }
 
@@ -803,6 +812,18 @@ namespace MyDictionary.ViewModels
             {
                 translatorAnswerColor = value;
                 OnPropertyChanged("TranslatorAnswerColor");
+            }
+        }
+
+        //Свойство, связанное с доступностью для нажатия кнопки "Answer".
+        private bool isAnswerButtonEnabled;
+        public bool IsAnswerButtonEnabled
+        {
+            get { return isAnswerButtonEnabled; }
+            set
+            {
+                isAnswerButtonEnabled = value;
+                OnPropertyChanged("IsAnswerButtonEnabled");
             }
         }
 
@@ -861,6 +882,8 @@ namespace MyDictionary.ViewModels
                 TranslatorAnswerColor = "Red";
                 selected.Incorrect++;
             }
+
+            IsAnswerButtonEnabled = false;
         }
         public DelegateCommand TranslatorAnswerConfirmation { get; set; }
 
@@ -895,6 +918,7 @@ namespace MyDictionary.ViewModels
             {
                 EnglishWord = testedWords[iterator].English;
                 AreKnowDontKnowButtonsEnabled = true;
+                IsAnswerButtonEnabled = true;
             }
             else
             {

@@ -172,8 +172,8 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TranslatorAnswer, Mode=TwoWay}" Visibility="{Binding TranslatorTestControlsVisibility, Mode=TwoWay}" Background="{Binding TranslatorAnswerColor, Mode=TwoWay}"/>
-                    <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Answer" Command="{Binding TranslatorAnswerConfirmation}" Visibility="{Binding TranslatorTestControlsVisibility, Mode=TwoWay}" Margin="5"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TranslatorAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding TranslatorTestControlsVisibility, Mode=TwoWay}" Background="{Binding TranslatorAnswerColor, Mode=TwoWay}"/>
+                    <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Answer" Command="{Binding TranslatorAnswerConfirmation}" IsEnabled="{Binding IsAnswerButtonEnabled}" Visibility="{Binding TranslatorTestControlsVisibility, Mode=TwoWay}" Margin="5"/>
 
                     <GroupBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="{Binding SettingsForTestVisibility, Mode=TwoWay}" Name="grpBoxYesNoTestSettings" Header="Test Settings" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">
                         <StackPanel>
@@ -200,7 +200,7 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TranslationWord}" Visibility="{Binding TestControlsVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding TranslationWord}" Visibility="{Binding TestControlsVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Center"/>
                     <Button Grid.Row="2" Grid.Column="1" Command="{Binding Know}" Content="I know it" IsEnabled="{Binding AreKnowDontKnowButtonsEnabled}" Visibility="{Binding TestControlsVisibility}" Background="#FF40F140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
                     <Button Grid.Row="2" Grid.Column="2" Command="{Binding DoNotKnow}" Content="Don't know" IsEnabled="{Binding AreKnowDontKnowButtonsEnabled}" Visibility="{Binding TestControlsVisibility}" Background="#FFFF6078" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
 
