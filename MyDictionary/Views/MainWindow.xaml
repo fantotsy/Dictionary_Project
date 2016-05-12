@@ -201,8 +201,8 @@
                     </GroupBox>
 
                     <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TranslationWord}" Visibility="{Binding TestControlsVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Center"/>
-                    <Button Grid.Row="2" Grid.Column="1" Command="{Binding Know}" Content="I know it" Visibility="{Binding TestControlsVisibility}" Background="#FF40F140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
-                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding DoNotKnow}" Content="Don't know" Visibility="{Binding TestControlsVisibility}" Background="#FFFF6078" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
+                    <Button Grid.Row="2" Grid.Column="1" Command="{Binding Know}" Content="I know it" IsEnabled="{Binding AreKnowDontKnowButtonsEnabled}" Visibility="{Binding TestControlsVisibility}" Background="#FF40F140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
+                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding DoNotKnow}" Content="Don't know" IsEnabled="{Binding AreKnowDontKnowButtonsEnabled}" Visibility="{Binding TestControlsVisibility}" Background="#FFFF6078" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
 
                 </Grid>
             </TabItem>

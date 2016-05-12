@@ -54,6 +54,7 @@ namespace MyDictionary.ViewModels
             InputTranslationWordBorderColor = "#FFFFFFFF";
             TranslatorAnswerColor = "#FFFFFFFF";
             IsButtonAddWordEnabled = true;
+            AreKnowDontKnowButtonsEnabled = false;
 
             //Привязка команд.
             Add = new DelegateCommand(AddToDictionary);
@@ -654,6 +655,18 @@ namespace MyDictionary.ViewModels
             }
         }
 
+        //Свойство, связанное с доступностью для нажатия кнопок "Know" и "Don't know".
+        private bool areKnowDontKnowButtonsEnabled;
+        public bool AreKnowDontKnowButtonsEnabled
+        {
+            get { return areKnowDontKnowButtonsEnabled; }
+            set
+            {
+                areKnowDontKnowButtonsEnabled = value;
+                OnPropertyChanged("AreKnowDontKnowButtonsEnabled");
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -666,6 +679,8 @@ namespace MyDictionary.ViewModels
             SelectionOfTestVisibility = "Hidden";
             SettingsForTestVisibility = "Visible";
             SettingsForEveryTestVisibility = "Visible";
+
+            AreKnowDontKnowButtonsEnabled = true;
         }
         public DelegateCommand YesNotTestSelect { get; set; }
 
@@ -678,6 +693,8 @@ namespace MyDictionary.ViewModels
 
             selected.Correct++;
             TranslationWord = selected.Translation;
+
+            AreKnowDontKnowButtonsEnabled = false;
         }
         public DelegateCommand Know { get; set; }
 
@@ -690,6 +707,8 @@ namespace MyDictionary.ViewModels
 
             selected.Incorrect++;
             TranslationWord = selected.Translation;
+
+            AreKnowDontKnowButtonsEnabled = false;
         }
         public DelegateCommand DoNotKnow { get; set; }
 
@@ -869,6 +888,7 @@ namespace MyDictionary.ViewModels
             if (iterator < testedWords.Count)
             {
                 EnglishWord = testedWords[iterator].English;
+                AreKnowDontKnowButtonsEnabled = true;
             }
             else
             {
