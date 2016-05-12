@@ -55,6 +55,12 @@ namespace MyDictionary.ViewModels
             TranslatorAnswerColor = "#FFFFFFFF";
             IsButtonAddWordEnabled = true;
             AreKnowDontKnowButtonsEnabled = false;
+            CleverSelectionChecked = false;
+            AscendingChecked = false;
+            DescendingChecked = false;
+            SimpleRandomChecked = false;
+            EngUkrTranslationChecked = false;
+            UkrEngTranslationChecked = false;
 
             //Привязка команд.
             Add = new DelegateCommand(AddToDictionary);
@@ -548,7 +554,7 @@ namespace MyDictionary.ViewModels
             {
                 cleverSelectionChecked = value;
                 OnPropertyChanged("CleverSelectionChecked");
-                if (Dictionary.Count > 0)
+                if (Dictionary.Count > 0 && value == true)
                 {
                     IsStartTestButtonEnabled = true;
                 }
@@ -564,7 +570,7 @@ namespace MyDictionary.ViewModels
             {
                 ascendingChecked = value;
                 OnPropertyChanged("AscendingChecked");
-                if (Dictionary.Count > 0)
+                if (Dictionary.Count > 0 && value == true)
                 {
                     IsStartTestButtonEnabled = true;
                 }
@@ -580,7 +586,7 @@ namespace MyDictionary.ViewModels
             {
                 descendingChecked = value;
                 OnPropertyChanged("DescendingChecked");
-                if (Dictionary.Count > 0)
+                if (Dictionary.Count > 0 && value == true)
                 {
                     IsStartTestButtonEnabled = true;
                 }
@@ -596,7 +602,7 @@ namespace MyDictionary.ViewModels
             {
                 simpleRandomChecked = value;
                 OnPropertyChanged("SimpleRandomChecked");
-                if (Dictionary.Count > 0)
+                if (Dictionary.Count > 0 && value == true)
                 {
                     IsStartTestButtonEnabled = true;
                 }
@@ -729,7 +735,7 @@ namespace MyDictionary.ViewModels
             {
                 engUkrTranslationChecked = value;
                 OnPropertyChanged("EngUkrTranslationChecked");
-                if (Dictionary.Count > 0)
+                if (Dictionary.Count > 0 && value == true)
                 {
                     IsStartTestButtonEnabled = true;
                 }
@@ -745,7 +751,7 @@ namespace MyDictionary.ViewModels
             {
                 ukrEngTranslationChecked = value;
                 OnPropertyChanged("UkrEngTranslationChecked");
-                if (Dictionary.Count > 0)
+                if (Dictionary.Count > 0 && value == true)
                 {
                     IsStartTestButtonEnabled = true;
                 }
