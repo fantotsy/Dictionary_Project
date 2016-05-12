@@ -78,7 +78,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyDictionaryData.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\TestWindowViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
