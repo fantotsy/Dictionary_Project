@@ -1,0 +1,224 @@
+﻿<Window x:Class="Dictionary.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MyDictionary" Height="360" Width="600" MinWidth="600" MinHeight="360" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Save}" Gesture="Ctrl+S"/>
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Row="0" FontFamily="Comic Sans MS">
+
+            <TabItem Header="Work Space">
+                <Grid Background="#FFD2EBFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Row="0" Grid.Column="1" Content="Delete" Command="{Binding Delete}" IsEnabled="{Binding IsDeleteButtonEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15"/>
+                    <Button Grid.Row="1" Grid.Column="1" Content="Save" Command="{Binding Save}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15"/>
+                    <ProgressBar Grid.Row="2" Grid.Column="1" Value="{Binding Progress}" Minimum="0" Maximum="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="10" Margin="10" Width="130"/>
+
+                    <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ItemsSource="{Binding Dictionary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding SelectedValue, Mode=OneWayToSource}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxColumnWidth="400" MinColumnWidth="30" AutoGenerateColumns="False" CanUserReorderColumns="False" BorderBrush="#FFB6B3EA">
+                        <DataGrid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <GradientStop Color="#FFB9C9FF" Offset="1"/>
+                                <GradientStop Color="#FFFDFDFD"/>
+                            </LinearGradientBrush>
+                        </DataGrid.Background>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding English}" IsReadOnly="True" Header="English"/>
+                            <DataGridTextColumn Binding="{Binding Translation}" Header="Translation"/>
+                            <DataGridTextColumn Binding="{Binding Type}" Header="Type"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <GroupBox Grid.Row="3" Grid.Column="1" Header="Word Info" FontWeight="Bold" FontSize="13">
+                        <StackPanel>
+                            <Label Content="{Binding Total}" FontWeight="Normal" FontSize="13" VerticalAlignment="Top" Margin="0,0,0,0"/>
+                            <Label Content="{Binding Correct}" FontWeight="Normal" FontSize="13" VerticalAlignment="Top" Margin="0,-5,0,0"/>
+                            <Label Content="{Binding Incorrect}" FontWeight="Normal" FontSize="13" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Add Word">
+                <Grid Background="#FFD2EBFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Grid.Row="0" Header="English word">
+                        <StackPanel>
+                            <TextBox TextWrapping="WrapWithOverflow" Text="{Binding English, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{Binding InputEnglishWordBorderColor}"/>
+                            <TextBlock Text="TIP: You need to enter english word or phrase, which contains no more than 30 symbols."
+                                   HorizontalAlignment="Left"
+                                   TextWrapping="WrapWithOverflow" Opacity="0.7"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Grid.Row="1" Header="Translation">
+                        <StackPanel>
+                            <TextBox TextWrapping="WrapWithOverflow" Text="{Binding Translation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{Binding InputTranslationWordBorderColor}"/>
+                            <TextBlock Text="TIP: You need to enter word or phrase, which is translation of english word, given above. This content contains no more than 50 symbols."
+                                   HorizontalAlignment="Left"
+                                   TextWrapping="WrapWithOverflow" Opacity="0.7"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Grid.Row="2" Header="Type of english word">
+                        <StackPanel>
+                            <ComboBox Text="{Binding WordType, Mode=TwoWay}" HorizontalAlignment="Left" Width="150">
+                                <ComboBoxItem>
+                                    <TextBlock Text="Not Given"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Adjective"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Adverb"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Conjunction"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Determiner"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Interjection"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Noun"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Pronoun"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Phrase"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Preposition"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Verb"/>
+                                </ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Text="TIP: You need to choose the type of english word, given above."
+                                   HorizontalAlignment="Left"
+                                   TextWrapping="WrapWithOverflow" Opacity="0.7"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <Button Grid.Row="4" Command="{Binding Add}" Content="Add Word" IsEnabled="{Binding IsButtonAddWordEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="TEST">
+                <Grid Background="#FFD2EBFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145"/>
+                        <ColumnDefinition Width="145"/>
+                        <ColumnDefinition Width="145"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="SELECT APPROPRIATE TEST" Visibility="{Binding SelectionOfTestVisibility}" FontSize="22" TextAlignment="Center"/>
+                    <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Command="{Binding YesNotTestSelect}" Content="Know/Don't know" Visibility="{Binding SelectionOfTestVisibility}" Background="#FFFFFF56" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5" FontSize="24" FontWeight="Bold"/>
+                    <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Command="{Binding TranslatorTestSelect}" Content="Translator" Visibility="{Binding SelectionOfTestVisibility}" Background="#FFFFFF56" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5" FontSize="24" FontWeight="Bold"/>
+
+                    <Button Grid.Row="2" Grid.Column="3" Command="{Binding Next}" Content="Next->" Visibility="{Binding EveryTestControlsVisibility}" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+                    <Button Grid.Row="2" Grid.Column="0" Command="{Binding End}" Content="End Test" Visibility="{Binding EveryTestControlsVisibility}" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding EnglishWord}" Visibility="{Binding EveryTestControlsVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+
+                    <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Start Test" Command="{Binding StartTest}" IsEnabled="{Binding IsStartTestButtonEnabled, Mode=TwoWay}" Visibility="{Binding SettingsForEveryTestVisibility, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" FontSize="20"/>
+
+                    <GroupBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="{Binding SettingsForTranslatorTestVisibility, Mode=TwoWay}" Name="grpBoxTranslatorTestSettings" Header="Test Settings" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">
+                        <StackPanel>
+                            <RadioButton IsChecked="{Binding EngUkrTranslationChecked, Mode=TwoWay}" FontWeight="Normal" Content="English-Ukrainian" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Запрос перевода с английского на украинский. Случайный порядок слов"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding UkrEngTranslationChecked, Mode=TwoWay}" FontWeight="Normal" Content="Ukrainian-English" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Запрос перевода с украинского на английский. Случайный порядок слов"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TranslatorAnswer, Mode=TwoWay}" Visibility="{Binding TranslatorTestControlsVisibility, Mode=TwoWay}" Background="{Binding TranslatorAnswerColor, Mode=TwoWay}"/>
+                    <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Answer" Command="{Binding TranslatorAnswerConfirmation}" Visibility="{Binding TranslatorTestControlsVisibility, Mode=TwoWay}" Margin="5"/>
+
+                    <GroupBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="{Binding SettingsForTestVisibility, Mode=TwoWay}" Name="grpBoxYesNoTestSettings" Header="Test Settings" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">
+                        <StackPanel>
+                            <RadioButton IsChecked="{Binding CleverSelectionChecked, Mode=TwoWay}" FontWeight="Normal" Content="Clever Selection" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Случайный порядок слов с большим приоритетом для менее успешных слов"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding AscendingChecked, Mode=TwoWay}" FontWeight="Normal" Content="Ascending" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Порядок слов в порядке алфавита"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding DescendingChecked, Mode=TwoWay}" FontWeight="Normal" Content="Descending" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Порядок слов в обратном порядке алфавита"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding SimpleRandomChecked, Mode=TwoWay}" FontWeight="Normal" Content="Simple Random" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <RadioButton.ToolTip>
+                                    <ToolTip Content="Случайный порядок слов"/>
+                                </RadioButton.ToolTip>
+                            </RadioButton>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TranslationWord}" Visibility="{Binding TestControlsVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+                    <Button Grid.Row="2" Grid.Column="1" Command="{Binding Know}" Content="I know it" Visibility="{Binding TestControlsVisibility}" Background="#FF40F140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
+                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding DoNotKnow}" Content="Don't know" Visibility="{Binding TestControlsVisibility}" Background="#FFFF6078" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" Margin="5"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Row="1" Background="#FFD2EBFF">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Number of words in dictionary:" HorizontalAlignment="Center" FontFamily="Comic Sans MS"/>
+            <Label Grid.Column="1" Content="{Binding NumberOfWords, Mode=TwoWay}" HorizontalAlignment="Left" FontFamily="Comic Sans MS"/>
+
+        </Grid>
+
+    </Grid>
+</Window>

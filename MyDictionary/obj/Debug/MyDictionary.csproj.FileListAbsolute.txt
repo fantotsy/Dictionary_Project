@@ -1,0 +1,16 @@
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\bin\Debug\MyDictionary.exe.config
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary.csprojResolveAssemblyReference.cache
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\App.g.cs
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary_MarkupCompile.cache
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary.g.resources
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary.Properties.Resources.resources
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary.csproj.GenerateResource.Cache
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\bin\Debug\MyDictionary.exe
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\bin\Debug\MyDictionary.pdb
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\bin\Debug\EntityFramework.dll
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\bin\Debug\EntityFramework.xml
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary.exe
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\MyDictionary.pdb
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\Views\MainWindow.baml
+C:\Users\Home\Documents\Visual Studio 2012\Projects\WPF\MyDictionary\MyDictionary\obj\Debug\Views\MainWindow.g.cs

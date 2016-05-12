@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DictionaryDBModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Хранилище DictionaryDBModelContainer">
+    <EntitySet Name="Eng_Ukr" EntityType="Хранилище DictionaryDBModel.Eng_Ukr" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Eng_Ukr">
+    <Key>
+      <PropertyRef Name="English" />
+    </Key>
+    <Property Name="English" Type="nchar" Nullable="false" MaxLength="30" />
+    <Property Name="Translation" Type="nchar" MaxLength="60" />
+    <Property Name="Correct" Type="int" Nullable="false" />
+    <Property Name="Incorrect" Type="int" Nullable="false" />
+    <Property Name="Type" Type="nchar" MaxLength="20" />
+  </EntityType>
+</Schema>

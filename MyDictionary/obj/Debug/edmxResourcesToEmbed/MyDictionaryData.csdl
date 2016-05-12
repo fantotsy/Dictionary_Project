@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DictionaryDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DictionaryDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Eng_Ukr" EntityType="DictionaryDBModel.Eng_Ukr" />
+  </EntityContainer>
+  <EntityType Name="Eng_Ukr">
+    <Key>
+      <PropertyRef Name="English" />
+    </Key>
+    <Property Name="English" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+    <Property Name="Correct" Type="Int32" Nullable="false" />
+    <Property Name="Incorrect" Type="Int32" Nullable="false" />
+    <Property Type="String" Name="Type" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Translation" MaxLength="60" FixedLength="true" Unicode="true" />
+  </EntityType>
+</Schema>
