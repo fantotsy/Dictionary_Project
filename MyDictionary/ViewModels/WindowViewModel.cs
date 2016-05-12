@@ -62,6 +62,7 @@ namespace MyDictionary.ViewModels
             EngUkrTranslationChecked = false;
             UkrEngTranslationChecked = false;
             IsAnswerButtonEnabled = false;
+            IsSaveButtonEnabled = true;
 
             //Привязка команд.
             Add = new DelegateCommand(AddToDictionary);
@@ -176,6 +177,18 @@ namespace MyDictionary.ViewModels
             }
         }
 
+        //Свойство, связанное с доступностью для нажатия кнопки "Save".
+        private bool isSaveButtonEnabled;
+        public bool IsSaveButtonEnabled
+        {
+            get { return isSaveButtonEnabled; }
+            set
+            {
+                isSaveButtonEnabled = value;
+                OnPropertyChanged("IsSaveButtonEnabled");
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -184,13 +197,14 @@ namespace MyDictionary.ViewModels
         private void DeleteFromDataBase()
         {
             var selectedWord = (from item in Dictionary
-                                where item.English == selectedValue.English
+                                where deleteWhiteSpaces(item.English) == deleteWhiteSpaces(selectedValue.English)
                                 select item).First();
 
             Dictionary.Remove(selectedWord);
+            Reset();
             dataContext.Eng_Ukr.Remove(selectedWord);
 
-            NumberOfWords--;
+            SaveChanges();
 
             IsDeleteButtonEnabled = false;
         }
@@ -203,6 +217,7 @@ namespace MyDictionary.ViewModels
             dataContext.SaveChanges();
 
             //Визуализация.
+            IsSaveButtonEnabled = false;
             Random rand = new Random();
             while (Progress < 100)
             {
@@ -211,6 +226,7 @@ namespace MyDictionary.ViewModels
             }
             Wait(500);
             Progress = 0;
+            IsSaveButtonEnabled = true;
 
             Reset();
         }
@@ -476,15 +492,7 @@ namespace MyDictionary.ViewModels
             get { return englishWord; }
             set
             {
-                //Удаление пробелов после слова, чтобы при отображении слово находилось посередине.
-                for (int i = 2; i < value.Length; i++)
-                {
-                    if (value[i - 1] == ' ' && value[i] == ' ')
-                    {
-                        englishWord = value.Substring(0, i - 1);
-                        break;
-                    }
-                }
+                englishWord = deleteWhiteSpaces(value);
                 OnPropertyChanged("EnglishWord");
             }
         }
@@ -543,6 +551,25 @@ namespace MyDictionary.ViewModels
             TestDispose();
         }
         public DelegateCommand End { get; set; }
+
+        #endregion
+
+        #region AdditionalComponents
+
+        //Удаление пробелов после слова, чтобы при отображении слово находилось посередине.
+        public string deleteWhiteSpaces(string word)
+        {
+            string result = word;
+            for (int i = 2; i < word.Length; i++)
+            {
+                if (word[i - 1] == ' ' && word[i] == ' ')
+                {
+                    result = word.Substring(0, i - 1);
+                    break;
+                }
+            }
+            return result;
+        }
 
         #endregion
 
@@ -623,21 +650,13 @@ namespace MyDictionary.ViewModels
             get { return translationWord; }
             set
             {
-                //Удаление пробелов после слова, чтобы слово отображалось посередине.
                 if (value == "")
                 {
                     translationWord = value;
                 }
                 else
                 {
-                    for (int i = 2; i < value.Length; i++)
-                    {
-                        if (value[i - 1] == ' ' && value[i] == ' ')
-                        {
-                            translationWord = value.Substring(0, i - 1);
-                            break;
-                        }
-                    }
+                    translationWord = deleteWhiteSpaces(value);
                 }
 
                 OnPropertyChanged("TranslationWord");
