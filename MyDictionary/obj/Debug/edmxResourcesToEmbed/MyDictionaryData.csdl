@@ -6,11 +6,12 @@
   <EntityType Name="Eng_Ukr">
     <Key>
       <PropertyRef Name="English" />
+      <PropertyRef Name="Translation" />
     </Key>
-    <Property Name="English" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
-    <Property Name="Correct" Type="Int32" Nullable="false" />
-    <Property Name="Incorrect" Type="Int32" Nullable="false" />
+    <Property Type="String" Name="English" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="Translation" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Type="Int32" Name="Correct" Nullable="false" />
+    <Property Type="Int32" Name="Incorrect" Nullable="false" />
     <Property Type="String" Name="Type" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Type="String" Name="Translation" MaxLength="60" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

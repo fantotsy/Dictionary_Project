@@ -4,11 +4,11 @@
     <EntitySetMapping Name="Eng_Ukr">
       <EntityTypeMapping TypeName="DictionaryDBModel.Eng_Ukr">
         <MappingFragment StoreEntitySet="Eng_Ukr">
-          <ScalarProperty Name="Translation" ColumnName="Translation" />
           <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="English" ColumnName="English" />
-          <ScalarProperty Name="Correct" ColumnName="Correct" />
           <ScalarProperty Name="Incorrect" ColumnName="Incorrect" />
+          <ScalarProperty Name="Correct" ColumnName="Correct" />
+          <ScalarProperty Name="Translation" ColumnName="Translation" />
+          <ScalarProperty Name="English" ColumnName="English" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

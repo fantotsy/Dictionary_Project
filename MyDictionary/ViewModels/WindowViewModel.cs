@@ -367,8 +367,7 @@ namespace MyDictionary.ViewModels
                 foreach (var word in Dictionary)
                 {
                     if (word.English.Substring(0, item.English.Length).Equals(item.English) &&
-                        word.Translation.Substring(0, item.Translation.Length).Equals(item.Translation) &&
-                        word.Type.Substring(0, item.Type.Length).Equals(item.Type))
+                        word.Translation.Substring(0, item.Translation.Length).Equals(item.Translation))
                     {
                         isSimilarWordFound = true;
                         break;
@@ -393,7 +392,7 @@ namespace MyDictionary.ViewModels
                         IsDeleteButtonEnabled = true;
                     }
 
-                    NumberOfWords++;
+                    SaveChanges();
                 }
             }
         }
@@ -499,7 +498,14 @@ namespace MyDictionary.ViewModels
         {
             Copy(Dictionary, testedWords);
             MixWords();
-            EnglishWord = testedWords[iterator].English;
+            if (testType == 1 || (testType == 2 && EngUkrTranslationChecked))
+            {
+                EnglishWord = testedWords[iterator].English;
+            }
+            if (testType == 2 && UkrEngTranslationChecked)
+            {
+                EnglishWord = testedWords[iterator].Translation;
+            }
 
             if (testType == 2)
             {
@@ -916,7 +922,14 @@ namespace MyDictionary.ViewModels
             iterator++;
             if (iterator < testedWords.Count)
             {
-                EnglishWord = testedWords[iterator].English;
+                if (testType == 1 || (testType == 2 && EngUkrTranslationChecked))
+                {
+                    EnglishWord = testedWords[iterator].English;
+                }
+                if (testType == 2 && UkrEngTranslationChecked)
+                {
+                    EnglishWord = testedWords[iterator].Translation;
+                }
                 AreKnowDontKnowButtonsEnabled = true;
                 IsAnswerButtonEnabled = true;
             }
@@ -977,6 +990,10 @@ namespace MyDictionary.ViewModels
                 if (DescendingChecked)
                 {
                     testedWords = (MixWordsByDescending(tempTestedWords));
+                }
+                else if (SimpleRandomChecked)
+                {
+                    testedWords = (MixWordsBySimpleRandom(tempTestedWords));
                 }
                 else
                 {
@@ -1051,7 +1068,7 @@ namespace MyDictionary.ViewModels
             for (int i = maximumOfIncorrect; i > 0; i--)
             {
                 var selectedWordsWithCertainNumberOfIncorrect = (from item in words
-                                                                 where item.Incorrect == maximumOfIncorrect
+                                                                 where item.Incorrect == i
                                                                  select item);
 
                 IEnumerable<Eng_Ukr> wordsWithCertainNumberOfIncorrect = selectedWordsWithCertainNumberOfIncorrect;

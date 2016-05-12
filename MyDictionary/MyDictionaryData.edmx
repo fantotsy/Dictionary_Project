@@ -11,9 +11,10 @@
         <EntityType Name="Eng_Ukr">
           <Key>
             <PropertyRef Name="English" />
+            <PropertyRef Name="Translation" />
           </Key>
           <Property Name="English" Type="nchar" Nullable="false" MaxLength="30" />
-          <Property Name="Translation" Type="nchar" MaxLength="60" />
+          <Property Name="Translation" Type="nchar" Nullable="false" MaxLength="60" />
           <Property Name="Correct" Type="int" Nullable="false" />
           <Property Name="Incorrect" Type="int" Nullable="false" />
           <Property Name="Type" Type="nchar" MaxLength="20" />
@@ -28,12 +29,13 @@
         <EntityType Name="Eng_Ukr">
           <Key>
             <PropertyRef Name="English" />
+            <PropertyRef Name="Translation" />
           </Key>
-          <Property Name="English" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
-          <Property Name="Correct" Type="Int32" Nullable="false" />
-          <Property Name="Incorrect" Type="Int32" Nullable="false" />
+          <Property Type="String" Name="English" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Translation" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="Correct" Nullable="false" />
+          <Property Type="Int32" Name="Incorrect" Nullable="false" />
           <Property Type="String" Name="Type" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="Translation" MaxLength="60" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -44,11 +46,11 @@
           <EntitySetMapping Name="Eng_Ukr">
             <EntityTypeMapping TypeName="DictionaryDBModel.Eng_Ukr">
               <MappingFragment StoreEntitySet="Eng_Ukr">
-                <ScalarProperty Name="Translation" ColumnName="Translation" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="English" ColumnName="English" />
-                <ScalarProperty Name="Correct" ColumnName="Correct" />
                 <ScalarProperty Name="Incorrect" ColumnName="Incorrect" />
+                <ScalarProperty Name="Correct" ColumnName="Correct" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+                <ScalarProperty Name="English" ColumnName="English" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

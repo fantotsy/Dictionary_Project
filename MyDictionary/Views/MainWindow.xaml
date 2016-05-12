@@ -33,7 +33,7 @@
                     <Button Grid.Row="1" Grid.Column="1" Content="Save" Command="{Binding Save}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="15"/>
                     <ProgressBar Grid.Row="2" Grid.Column="1" Value="{Binding Progress}" Minimum="0" Maximum="100"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="10" Margin="10" Width="130"/>
 
-                    <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ItemsSource="{Binding Dictionary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding SelectedValue, Mode=OneWayToSource}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxColumnWidth="400" MinColumnWidth="30" AutoGenerateColumns="False" CanUserReorderColumns="False" BorderBrush="#FFB6B3EA">
+                    <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ItemsSource="{Binding Dictionary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding SelectedValue, Mode=OneWayToSource}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" MaxColumnWidth="400" MinColumnWidth="30" AutoGenerateColumns="False" CanUserReorderColumns="False" BorderBrush="#FFB6B3EA" IsManipulationEnabled="True" IsReadOnly="True">
                         <DataGrid.Background>
                             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                 <GradientStop Color="#FFB9C9FF" Offset="1"/>

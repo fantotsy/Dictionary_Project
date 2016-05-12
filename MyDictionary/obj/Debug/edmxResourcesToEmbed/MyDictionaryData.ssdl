@@ -6,9 +6,10 @@
   <EntityType Name="Eng_Ukr">
     <Key>
       <PropertyRef Name="English" />
+      <PropertyRef Name="Translation" />
     </Key>
     <Property Name="English" Type="nchar" Nullable="false" MaxLength="30" />
-    <Property Name="Translation" Type="nchar" MaxLength="60" />
+    <Property Name="Translation" Type="nchar" Nullable="false" MaxLength="60" />
     <Property Name="Correct" Type="int" Nullable="false" />
     <Property Name="Incorrect" Type="int" Nullable="false" />
     <Property Name="Type" Type="nchar" MaxLength="20" />
