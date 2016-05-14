@@ -30,14 +30,13 @@ namespace MyDictionary.ViewModels
         public WindowViewModel()
         {
             dataContext = new DictionaryDBEntities();
+            Dictionary = new ObservableCollection<Eng_Ukr>(dataContext.Eng_Ukr);
             Reset();
         }
 
         //Восстановление всех начальных показателей, кроме привязки к базе данных.
         public void Reset()
         {
-            Dictionary = new ObservableCollection<Eng_Ukr>(dataContext.Eng_Ukr);
-
             //Установка видимости и доступности объектов.
             SettingsForTestVisibility = "Hidden";
             SettingsForEveryTestVisibility = "Hidden";
@@ -201,11 +200,9 @@ namespace MyDictionary.ViewModels
                                 select item).First();
 
             Dictionary.Remove(selectedWord);
-            Reset();
             dataContext.Eng_Ukr.Remove(selectedWord);
-
             SaveChanges();
-
+            NumberOfWords--;
             IsDeleteButtonEnabled = false;
         }
         public DelegateCommand Delete { get; set; }
@@ -227,8 +224,6 @@ namespace MyDictionary.ViewModels
             Wait(500);
             Progress = 0;
             IsSaveButtonEnabled = true;
-
-            Reset();
         }
         public DelegateCommand Save { get; set; }
 
@@ -382,8 +377,8 @@ namespace MyDictionary.ViewModels
                 bool isSimilarWordFound = false;
                 foreach (var word in Dictionary)
                 {
-                    if (word.English.Substring(0, item.English.Length).Equals(item.English) &&
-                        word.Translation.Substring(0, item.Translation.Length).Equals(item.Translation))
+                    if (deleteWhiteSpaces(word.English).Equals(item.English) &&
+                        deleteWhiteSpaces(word.Translation).Equals(item.Translation))
                     {
                         isSimilarWordFound = true;
                         break;
@@ -407,7 +402,7 @@ namespace MyDictionary.ViewModels
                     {
                         IsDeleteButtonEnabled = true;
                     }
-
+                    NumberOfWords++;
                     SaveChanges();
                 }
             }
@@ -565,6 +560,11 @@ namespace MyDictionary.ViewModels
                 if (word[i - 1] == ' ' && word[i] == ' ')
                 {
                     result = word.Substring(0, i - 1);
+                    break;
+                }
+                if (i == word.Length - 1 && word[i] == ' ')
+                {
+                    result = word.Substring(0, i);
                     break;
                 }
             }
@@ -871,41 +871,49 @@ namespace MyDictionary.ViewModels
         private void TranslatorAnswerConfirm()
         {
             var selected = (from item in Dictionary
-                            where item.English == testedWords[iterator].English
+                            where deleteWhiteSpaces(item.English) == deleteWhiteSpaces(testedWords[iterator].English)
                             select item).First();
 
             var selectedArray = (from item in Dictionary
-                                 where item.English == testedWords[iterator].English
+                                 where deleteWhiteSpaces(item.English) == deleteWhiteSpaces(testedWords[iterator].English)
                                  select item);
-
-            List<string> rightAnswers = new List<string>();
-
-            foreach (var item in selectedArray)
+            if (EngUkrTranslationChecked)
             {
-                rightAnswers.AddRange(item.Translation.Split(','));
-
-                string lastWord = rightAnswers.Last();
-                rightAnswers.RemoveAt(rightAnswers.Count - 1);
-
-                for (int i = 2; i < lastWord.Length; i++)
+                List<string> rightAnswers = new List<string>();
+            
+                foreach (var item in selectedArray)
                 {
-                    if (lastWord[i - 1] == ' ' && lastWord[i] == ' ')
-                    {
-                        rightAnswers.Add(lastWord.Substring(0, i - 1));
-                        break;
-                    }
+                    rightAnswers.AddRange(item.Translation.Split(','));
+
+                    string lastWord = rightAnswers.Last();
+                    rightAnswers.RemoveAt(rightAnswers.Count - 1);
+
+                    rightAnswers.Add(deleteWhiteSpaces(lastWord));
+                }
+
+                if (rightAnswers.Contains(deleteWhiteSpaces(TranslatorAnswer)))
+                {
+                    TranslatorAnswerColor = "Green";
+                    selected.Correct++;
+                }
+                else
+                {
+                    TranslatorAnswerColor = "Red";
+                    selected.Incorrect++;
                 }
             }
-
-            if (rightAnswers.Contains(TranslatorAnswer))
+            if (UkrEngTranslationChecked)
             {
-                TranslatorAnswerColor = "Green";
-                selected.Correct++;
-            }
-            else
-            {
-                TranslatorAnswerColor = "Red";
-                selected.Incorrect++;
+                if (deleteWhiteSpaces(testedWords[iterator].English) == deleteWhiteSpaces(TranslatorAnswer))
+                {
+                    TranslatorAnswerColor = "Green";
+                    selected.Correct++;
+                }
+                else
+                {
+                    TranslatorAnswerColor = "Red";
+                    selected.Incorrect++;
+                }
             }
 
             IsAnswerButtonEnabled = false;
