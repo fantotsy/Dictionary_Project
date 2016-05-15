@@ -201,9 +201,9 @@ namespace MyDictionary.ViewModels
 
             Dictionary.Remove(selectedWord);
             dataContext.Eng_Ukr.Remove(selectedWord);
+            IsDeleteButtonEnabled = false;
             SaveChanges();
             NumberOfWords--;
-            IsDeleteButtonEnabled = false;
         }
         public DelegateCommand Delete { get; set; }
 
@@ -554,21 +554,19 @@ namespace MyDictionary.ViewModels
         //Удаление пробелов после слова, чтобы при отображении слово находилось посередине.
         public string deleteWhiteSpaces(string word)
         {
-            string result = word;
-            for (int i = 2; i < word.Length; i++)
+            int spacesCount = 0;
+            for (int i = word.Length - 1; i > 0; i--)
             {
-                if (word[i - 1] == ' ' && word[i] == ' ')
+                if (word[i] == ' ')
                 {
-                    result = word.Substring(0, i - 1);
-                    break;
+                    spacesCount++;
                 }
-                if (i == word.Length - 1 && word[i] == ' ')
+                else
                 {
-                    result = word.Substring(0, i);
                     break;
                 }
             }
-            return result;
+            return (word.Substring(0, word.Length - spacesCount));
         }
 
         #endregion
@@ -880,7 +878,7 @@ namespace MyDictionary.ViewModels
             if (EngUkrTranslationChecked)
             {
                 List<string> rightAnswers = new List<string>();
-            
+
                 foreach (var item in selectedArray)
                 {
                     rightAnswers.AddRange(item.Translation.Split(','));
@@ -893,12 +891,12 @@ namespace MyDictionary.ViewModels
 
                 if (rightAnswers.Contains(deleteWhiteSpaces(TranslatorAnswer)))
                 {
-                    TranslatorAnswerColor = "Green";
+                    TranslatorAnswerColor = "#FFC3FFC3";
                     selected.Correct++;
                 }
                 else
                 {
-                    TranslatorAnswerColor = "Red";
+                    TranslatorAnswerColor = "#FFFF687D";
                     selected.Incorrect++;
                 }
             }
@@ -906,12 +904,12 @@ namespace MyDictionary.ViewModels
             {
                 if (deleteWhiteSpaces(testedWords[iterator].English) == deleteWhiteSpaces(TranslatorAnswer))
                 {
-                    TranslatorAnswerColor = "Green";
+                    TranslatorAnswerColor = "#FFC3FFC3";
                     selected.Correct++;
                 }
                 else
                 {
-                    TranslatorAnswerColor = "Red";
+                    TranslatorAnswerColor = "#FFFF687D";
                     selected.Incorrect++;
                 }
             }
@@ -931,6 +929,7 @@ namespace MyDictionary.ViewModels
         {
             iterator = 0;
             testedWords.Clear();
+            TranslationWord = "";
             Reset();
         }
 
@@ -958,7 +957,7 @@ namespace MyDictionary.ViewModels
                     EnglishWord = testedWords[iterator].Translation;
                 }
                 AreKnowDontKnowButtonsEnabled = true;
-                IsAnswerButtonEnabled = true;
+                IsAnswerButtonEnabled = false;
             }
             else
             {

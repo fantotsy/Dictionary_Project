@@ -15,7 +15,7 @@ namespace Dictionary
         {
             InitializeComponent();
 
-            //Bind the view model to the view (UI).
+            //Связывание модели представления и представления(UI).
             this.DataContext = viewModel;
         }
 
